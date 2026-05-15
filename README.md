@@ -188,7 +188,7 @@ The chatbot analyzes user input and generates responses dynamically.
 
 # 🌐 Connect with Me
 
-- GitHub: https://github.com/yourusername
+- GitHub: https://github.com/Dhanushree-Ganesh
 
 ---
 
