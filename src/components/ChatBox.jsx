@@ -1,16 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Message from "./Message";
+import Typing from "./Typing";
 
-function ChatBox() {
-
-  const [messages, setMessages] = useState([
-    {
-      text: "Hello! How can I help you?",
-      sender: "bot"
-    }
-  ]);
+function ChatBox({ messages, setMessages }) {
 
   const [input, setInput] = useState("");
+  const [typing, setTyping] = useState(false);
+
+  const bottomRef = useRef(null);
+
+  useEffect(() => {
+
+    bottomRef.current?.scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }, [messages]);
 
   const sendMessage = () => {
 
@@ -21,32 +26,42 @@ function ChatBox() {
       sender: "user"
     };
 
+    setMessages((prev) => [...prev, userMessage]);
+
+    setTyping(true);
+
     let reply = "";
 
-    const userText = input.toLowerCase();
+    const text = input.toLowerCase();
 
-    if (userText.includes("hello")) {
-      reply = "Hello! Nice to meet you 😊";
+    if (text.includes("hello") || text.includes("hi")) {
+      reply = "Hello 👋 Nice to meet you!";
     }
-    else if (userText.includes("hi")) {
-      reply = "Hi there 👋";
+    else if (text.includes("help")) {
+      reply = "Sure! Tell me what you need help with.";
     }
-    else if (userText.includes("help")) {
-      reply = "Sure! Tell me how I can help.";
+    else if (text.includes("react")) {
+      reply = "ReactJS is a JavaScript library for building UI.";
     }
-    else if (userText.includes("bye")) {
-      reply = "Goodbye 👋";
+    else if (text.includes("bye")) {
+      reply = "Goodbye 👋 Have a great day!";
     }
     else {
-      reply = "Sorry, I don't understand.";
+      reply = "Sorry, I don't understand that yet.";
     }
 
-    const botReply = {
-      text: reply,
-      sender: "bot"
-    };
+    setTimeout(() => {
 
-    setMessages([...messages, userMessage, botReply]);
+      const botReply = {
+        text: reply,
+        sender: "bot"
+      };
+
+      setMessages((prev) => [...prev, botReply]);
+
+      setTyping(false);
+
+    }, 1000);
 
     setInput("");
   };
@@ -55,6 +70,7 @@ function ChatBox() {
     <div className="chat-container">
 
       <div className="messages">
+
         {messages.map((msg, index) => (
           <Message
             key={index}
@@ -62,20 +78,25 @@ function ChatBox() {
             sender={msg.sender}
           />
         ))}
+
+        {typing && <Typing />}
+
+        <div ref={bottomRef}></div>
+
       </div>
 
       <div className="input-box">
 
         <input
-         type="text"
-  placeholder="Type message..."
-  value={input}
-  onChange={(e) => setInput(e.target.value)}
-  onKeyDown={(e) => {
-    if (e.key === "Enter") {
-      sendMessage();
-    }
-  }}
+          type="text"
+          placeholder="Type your message..."
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              sendMessage();
+            }
+          }}
         />
 
         <button onClick={sendMessage}>

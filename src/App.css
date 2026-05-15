@@ -1,26 +1,65 @@
 body {
   margin: 0;
   font-family: Arial;
+  background: #020617;
+}
+
+.app-layout {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
   background: #0f172a;
+  color: white;
+  padding: 20px;
+  border-right: 1px solid #1e293b;
+}
+
+.sidebar h2 {
+  text-align: center;
+}
+
+.sidebar button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  border-radius: 8px;
+  margin-top: 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.sidebar ul {
+  margin-top: 30px;
+}
+
+.sidebar li {
+  margin: 20px 0;
+  font-size: 18px;
+}
+
+.main-chat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .navbar {
   background: #1e293b;
   color: white;
-  padding: 15px;
+  padding: 20px;
   text-align: center;
 }
 
 .chat-container {
-  width: 80%;
-  max-width: 700px;
-  margin: 20px auto;
-  background: #1e293b;
-  border-radius: 10px;
-  padding: 20px;
-  height: 80vh;
+  flex: 1;
   display: flex;
   flex-direction: column;
+  padding: 20px;
 }
 
 .messages {
@@ -31,39 +70,50 @@ body {
 .user-msg {
   background: #2563eb;
   color: white;
-  padding: 10px;
-  border-radius: 10px;
-  margin: 10px;
+  padding: 14px;
+  border-radius: 12px;
   width: fit-content;
   margin-left: auto;
+  margin-top: 20px;
+  max-width: 300px;
 }
 
 .bot-msg {
   background: #334155;
   color: white;
-  padding: 10px;
-  border-radius: 10px;
-  margin: 10px;
+  padding: 14px;
+  border-radius: 12px;
   width: fit-content;
+  margin-top: 20px;
+  max-width: 300px;
+}
+
+.typing {
+  color: white;
+  margin-top: 10px;
 }
 
 .input-box {
   display: flex;
   gap: 10px;
+  margin-top: 20px;
 }
 
 .input-box input {
   flex: 1;
-  padding: 12px;
-  border-radius: 5px;
+  padding: 14px;
   border: none;
+  border-radius: 8px;
+  background: #1e293b;
+  color: white;
+  font-size: 16px;
 }
 
 .input-box button {
-  padding: 12px 20px;
+  padding: 14px 24px;
   border: none;
   background: #2563eb;
   color: white;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
 }
